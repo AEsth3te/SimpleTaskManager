@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
     </td>
   `;
 
-  // Прив’язуємо обробники
   row.querySelector('.change-btn').addEventListener('click', () => {
     toggleComplete(task.idtask, !task.isTaskCompleted);
   });
@@ -75,5 +74,5 @@ document.addEventListener('DOMContentLoaded', () => {
     if (res.ok) loadTasks();
   }
 
-  loadTasks(); // завантаження при старті
+  loadTasks();
 });
