@@ -1,30 +1,27 @@
 const express = require('express');
 const path = require('path');
 const sequelize = require('./config/db');
+const userRouter = require('./routes/userRouter');
 const taskRouter = require('./routes/tasksRouter');
 
 const app = express();
+const port = 2000;
 
-// 1️⃣ Публічні файли
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// 2️⃣ JSON парсер
-app.use(express.json());
+app.use('/api/users', userRouter);   // /api/users/login
+app.use('/api/tasks', taskRouter);   // /api/tasks/task
 
-// 3️⃣ API
-app.use('/tasks', taskRouter);
-
-// 4️⃣ Головна сторінка (НЕ ОБОВ'ЯЗКОВО, якщо є index.html в public)
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.redirect('/login.html');
 });
 
-// 5️⃣ Запуск сервера
 sequelize.authenticate()
   .then(() => {
     console.log('DB connected');
-    app.listen(2002, () => {
-      console.log('Server started on http://localhost:2002');
+    app.listen(port, () => {
+      console.log(`Server started on http://localhost:${port}`);
     });
   })
   .catch(err => {
