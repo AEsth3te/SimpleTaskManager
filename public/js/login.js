@@ -18,3 +18,8 @@
         alert(data.message);
       }
     });
+document.getElementById("registration-btn").addEventListener('click', () => {
+  window.location.href = '/registration.html'; // Перенаправлення на логін
+});
+
+
