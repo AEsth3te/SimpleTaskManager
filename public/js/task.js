@@ -86,7 +86,11 @@ async function loadTasks() {
 
   async function deleteTask(id) {
     const res = await fetch(`/api/tasks/${id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
     });
     if (res.ok) loadTasks();
   }
